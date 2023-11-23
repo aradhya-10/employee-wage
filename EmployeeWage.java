@@ -8,11 +8,19 @@ public class EmployeeWage {
 		
 		int empWage = 0;
 		int workHours = 0;
+		double isPartTime = Math.floor(Math.random() * 10) % 2;;
 		double isPresent = Math.floor(Math.random() * 10) % 2;
 
 		if (isPresent == 1) {
+			if(isPartTime == 1){
+				workHours = 8;
+				System.out.print("Fulltime ");
+			}
+			else{
+				workHours = 2;
+				System.out.print("Part-time ");
+			}
 			System.out.println("Employee is Present");
-			workHours = 8;
 		}
 		else
 			System.out.println("Employee is Absent");
