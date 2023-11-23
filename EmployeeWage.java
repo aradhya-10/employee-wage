@@ -4,13 +4,19 @@ public class EmployeeWage {
 	
 	public static final int WAGE_RATE = 20;
 	public static final int WORKING_DAYS = 20;
+	public static final int MAX_WORKING_DAYS = 20;
+	public static final int MAX_WORKING_HOURS = 100;
+
 	public static void main(String[] args) {
 		System.out.println("Employee Attendance");
 		
 		int empWage = 0;
 		int workHours = 0;
+		int totalWorkHours = 0;
+		int totalPresentDays = 0;
 		
-		for(int i=1; i<=WORKING_DAYS; i++){
+		while(totalWorkHours<=MAX_WORKING_HOURS && totalPresentDays<=MAX_WORKING_DAYS){
+			totalPresentDays++;
 			double empType = Math.floor(Math.random() * 10) % 3;
 			switch ((int)empType){
 				case 1:
@@ -21,13 +27,14 @@ public class EmployeeWage {
 					System.out.println("Employee is Present Part-time");
 					workHours = 2;
 					break;
-					default:
+				default:
 					workHours = 0;
 					System.out.println("Employee is Absent");
 			}
-			empWage += workHours * WAGE_RATE;
+			totalWorkHours += workHours;
 		}
-			
+		
+		empWage = totalWorkHours * WAGE_RATE;
 		System.out.println("Total Employee Wage for the month is: "+empWage);
 	}
 }
