@@ -1,12 +1,14 @@
-import java.util.*;
+// import java.util.*;
 
 public class EmployeeWage {
 	
+	String companyName;
 	int wageRate;
 	int workingDays;
 	int maxWorkingHours;
 
-	EmployeeWage(int wageRate, int workingDays, int maxWorkingHours){
+	EmployeeWage(String companyName, int wageRate, int workingDays, int maxWorkingHours){
+		this.companyName = companyName;
 		this.wageRate = wageRate;
 		this.workingDays = workingDays;
 		this.maxWorkingHours = maxWorkingHours;
@@ -46,16 +48,14 @@ public class EmployeeWage {
 		}
 		
 		empWage = totalWorkHours * wageRate;
-		System.out.println("Total Employee Wage for the month is: "+empWage);
+		System.out.println("Total Employee Wage at " + this.companyName + " for the month is: "+empWage);
 	}
 	public static void main(String[] args) {
-		EmployeeWage E1 = new EmployeeWage(20, 20, 100);
-		EmployeeWage E2 = new EmployeeWage(22, 20, 120);
-		// EmployeeWage E3 = new EmployeeWage(25, 26, 80);
+		EmployeeWage E1 = new EmployeeWage("Company1", 20, 20, 100);
+		EmployeeWage E2 = new EmployeeWage("Company2",22, 20, 120);
+		// EmployeeWage E3 = new EmployeeWage("Company3", 25, 26, 80);
 
-		System.out.println("Company 1\n");
 		E1.calculateTotalWage();
-		System.out.println("Company 1\n");
 		E2.calculateTotalWage();
 	}
 }
