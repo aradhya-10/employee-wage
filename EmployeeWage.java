@@ -1,18 +1,39 @@
 // import java.util.*;
 
-public class EmployeeWage {
-	
-	String companyName;
-	int wageRate;
-	int workingDays;
-	int maxWorkingHours;
+class CompanyEmpWage {
+		
+	final String companyName;
+	final int wageRate;
+	final int workingDays;
+	final int maxWorkingHours;
+	int totalEmpWage;
 
-	EmployeeWage(String companyName, int wageRate, int workingDays, int maxWorkingHours){
+	CompanyEmpWage(String companyName, int wageRate, int workingDays, int maxWorkingHours){
 		this.companyName = companyName;
 		this.wageRate = wageRate;
 		this.workingDays = workingDays;
 		this.maxWorkingHours = maxWorkingHours;
+		this.totalEmpWage = 0;
 	}
+
+	public void setTotalEmpWage(int wage){
+		this.totalEmpWage = wage;
+	}
+
+	public void displayTotalWage(){
+		System.out.println("Total Wage for " + this.companyName + " for the month is: " + this.totalEmpWage);
+	}
+}
+public class EmployeeWage {
+	
+	CompanyEmpWage[] CompanyEmpWages = new CompanyEmpWage[10];
+
+	int cIndex=0;
+
+	public void addCompanyEmpWage(String name, int wageRate, int workingDays, int maxWorkingHours){
+		CompanyEmpWages[cIndex] = new CompanyEmpWage(name, wageRate, workingDays, maxWorkingHours);
+		cIndex++;
+	};
 
 	int calcDailyWorkHours(int empType){
 		int workHours = 0;
@@ -32,7 +53,7 @@ public class EmployeeWage {
 		return workHours;
 	}
 
-	void calculateTotalWage(){
+	void calculateTotalWage(CompanyEmpWage company){
 		System.out.println("Employee Attendance");
 		
 		int empWage = 0;
@@ -40,22 +61,28 @@ public class EmployeeWage {
 		int totalWorkHours = 0;
 		int totalPresentDays = 0;
 		
-		while(totalWorkHours<=maxWorkingHours && totalPresentDays<=workingDays){
+		while(totalWorkHours<=company.maxWorkingHours && totalPresentDays<=company.workingDays){
 			totalPresentDays++;
 			double empType = Math.floor(Math.random() * 10) % 3;
 			workHours = calcDailyWorkHours((int)empType);
 			totalWorkHours += workHours;
 		}
 		
-		empWage = totalWorkHours * wageRate;
-		System.out.println("Total Employee Wage at " + this.companyName + " for the month is: "+empWage);
+		empWage = totalWorkHours * company.wageRate;
+		company.setTotalEmpWage(empWage);
+		company.displayTotalWage();
 	}
-	public static void main(String[] args) {
-		EmployeeWage E1 = new EmployeeWage("Company1", 20, 20, 100);
-		EmployeeWage E2 = new EmployeeWage("Company2",22, 20, 120);
-		// EmployeeWage E3 = new EmployeeWage("Company3", 25, 26, 80);
 
-		E1.calculateTotalWage();
-		E2.calculateTotalWage();
+	private void calcAllEmpWages() {
+		for (int i = 0; i < cIndex; i++) {
+			this.calculateTotalWage(CompanyEmpWages[i]);
+		}
+	}
+
+	public static void main(String[] args) {
+		EmployeeWage E1 = new EmployeeWage();
+		E1.addCompanyEmpWage("Company3", 25, 26, 80);
+		E1.addCompanyEmpWage("Company3", 25, 26, 80);
+		E1.calcAllEmpWages();
 	}
 }
