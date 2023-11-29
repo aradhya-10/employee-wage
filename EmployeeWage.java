@@ -1,4 +1,8 @@
 // import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 interface EmployeeWageInterface {
 	int calcDailyWorkHours(int empType);
 	void calcAllEmpWages();
@@ -30,13 +34,13 @@ class CompanyEmpWage {
 }
 public class EmployeeWage implements EmployeeWageInterface{
 	
-	CompanyEmpWage[] CompanyEmpWages = new CompanyEmpWage[10];
+	List<CompanyEmpWage> companyEmpWages = new ArrayList<>();
 
 	int cIndex=0;
 
 	public void addCompanyEmpWage(String name, int wageRate, int workingDays, int maxWorkingHours){
-		CompanyEmpWages[cIndex] = new CompanyEmpWage(name, wageRate, workingDays, maxWorkingHours);
-		cIndex++;
+		CompanyEmpWage c1 = new CompanyEmpWage(name, wageRate, workingDays, maxWorkingHours);
+		companyEmpWages.add(c1);		cIndex++;
 	};
 
 	@Override
@@ -80,8 +84,8 @@ public class EmployeeWage implements EmployeeWageInterface{
 
 	@Override
 	public void calcAllEmpWages() {
-		for (int i = 0; i < cIndex; i++) {
-			this.calculateTotalWage(CompanyEmpWages[i]);
+		for(CompanyEmpWage companyEmpWage: companyEmpWages) {
+			this.calculateTotalWage(companyEmpWage);
 		}
 	}
 
