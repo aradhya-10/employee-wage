@@ -1,4 +1,8 @@
 // import java.util.*;
+interface EmployeeWageInterface {
+	int calcDailyWorkHours(int empType);
+	void calcAllEmpWages();
+}
 
 class CompanyEmpWage {
 		
@@ -24,7 +28,7 @@ class CompanyEmpWage {
 		System.out.println("Total Wage for " + this.companyName + " for the month is: " + this.totalEmpWage);
 	}
 }
-public class EmployeeWage {
+public class EmployeeWage implements EmployeeWageInterface{
 	
 	CompanyEmpWage[] CompanyEmpWages = new CompanyEmpWage[10];
 
@@ -35,7 +39,8 @@ public class EmployeeWage {
 		cIndex++;
 	};
 
-	int calcDailyWorkHours(int empType){
+	@Override
+	public int calcDailyWorkHours(int empType){
 		int workHours = 0;
 		switch (empType){
 			case 1:
@@ -73,7 +78,8 @@ public class EmployeeWage {
 		company.displayTotalWage();
 	}
 
-	private void calcAllEmpWages() {
+	@Override
+	public void calcAllEmpWages() {
 		for (int i = 0; i < cIndex; i++) {
 			this.calculateTotalWage(CompanyEmpWages[i]);
 		}
